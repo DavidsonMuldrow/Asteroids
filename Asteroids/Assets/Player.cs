@@ -3,34 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : SpaceObject
 {
 
     private Vector2 input_vec = Vector2.zero;
     private float rotate_speed = 200f;
-    private Rigidbody2D rb;
-    private float max_speed = 5.5f;
     private float acceleration = 13;
-    private Vector2 velocity = Vector2.zero;
 
     //screen wrapping
-    public Camera cam;
-    private Vector2 cam_bottom_left = Vector2.zero;
-    private Vector2 cam_top_right = Vector2.zero;
-    private float wrap_radius = 0.16f;
 
     //Ships visuals
     public GameObject ship_sprite;
     private float jitter_amount = 0.04f;
 
+    public GameObject fire_sprite;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D> ();
+        fire_sprite.SetActive(false);
 
-        cam_top_right = new Vector2(cam.scaledPixelWidth, cam.scaledPixelHeight);
-        cam_bottom_left = cam.ScreenToWorldPoint(cam_bottom_left);
-        cam_top_right = cam.ScreenToWorldPoint(cam_top_right);
+        rb = GetComponent<Rigidbody2D> ();
+        max_speed = 5.5f;
+        wrap_radius = 0.16f;
+
+        FindCameraBounds();
     }
 
     // Update is called once per frame
@@ -47,35 +44,23 @@ public class Player : MonoBehaviour
 
             velocity = Vector2.ClampMagnitude(velocity, max_speed);
 
-            //jitter
+            //jitter and fire sprite
             Vector2 jitter_pos = new Vector2(Random.Range(-jitter_amount, jitter_amount), Random.Range(-jitter_amount, jitter_amount));
             ship_sprite.transform.localPosition = jitter_pos;
+
+            fire_sprite.SetActive(true);
+            fire_sprite.transform.localPosition = new Vector2(Random.Range(-jitter_amount, jitter_amount) + 0.01f, Random.Range(-jitter_amount, jitter_amount) - 0.25f);
+        } else
+        {
+            ship_sprite.transform.localPosition = Vector2.zero;
+
+            fire_sprite.SetActive(false);
         }
 
         rb.MovePosition(rb.position + (velocity *Time.fixedDeltaTime));
 
         #region Screen Wrap
-
-        if (rb.position.x - wrap_radius > cam_top_right.x)
-        {
-            rb.MovePosition(new Vector2(cam_bottom_left.x - wrap_radius + 0.01f, rb.position.y));
-        }
-
-        if (rb.position.x + wrap_radius < cam_bottom_left.x)
-        {
-            rb.MovePosition(new Vector2(cam_top_right.x + wrap_radius - 0.01f, rb.position.y));
-        }
-
-        if (rb.position.y - wrap_radius > cam_top_right.y)
-        {
-            rb.MovePosition(new Vector2(rb.position.x, cam_bottom_left.y - wrap_radius + 0.01f));
-        }
-
-        if (rb.position.y + wrap_radius < cam_bottom_left.y)
-        {
-            rb.MovePosition(new Vector2(rb.position.x, cam_top_right.y + wrap_radius - 0.01f));
-        }
-
+        ScreenWrap();
         #endregion
     }
 
