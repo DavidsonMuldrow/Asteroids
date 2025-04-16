@@ -18,6 +18,11 @@ public class Player : SpaceObject
 
     public GameObject fire_sprite;
 
+    //Shooting
+    public GameObject bullet;
+    private float rate_of_fire = 0.1f;
+    private float shoot_timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,14 @@ public class Player : SpaceObject
         wrap_radius = 0.16f;
 
         FindCameraBounds();
+    }
+
+    private void Update()
+    {
+        if (shoot_timer > 0)
+        {
+            shoot_timer -= Time.deltaTime;
+        }
     }
 
     // Update is called once per frame
@@ -67,6 +80,20 @@ public class Player : SpaceObject
     public void CaptureMoveInput(InputAction.CallbackContext context)
     {
         input_vec = context.ReadValue<Vector2>();
+    }
+
+    public void CaptureShootInput(InputAction.CallbackContext context)
+    {
+        if (shoot_timer <= 0)
+        {
+            shoot_timer = rate_of_fire;
+
+            GameObject new_bullet = Instantiate(bullet);
+
+            new_bullet.GetComponent<Bullet>().SetUp(transform.up);
+
+            new_bullet.transform.position = transform.position;
+        }
     }
 
     private void OnDrawGizmos()

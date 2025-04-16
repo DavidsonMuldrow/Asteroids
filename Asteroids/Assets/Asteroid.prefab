@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7893648376320103023}
   - component: {fileID: 2886242158269326749}
   - component: {fileID: 4658345232299737951}
-  m_Layer: 0
+  - component: {fileID: 8766403873376674031}
+  m_Layer: 7
   m_Name: Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +79,41 @@ MonoBehaviour:
   - {fileID: 1939848758, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
   - {fileID: -1399165551, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
   - {fileID: 133880656, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
+--- !u!58 &8766403873376674031
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649555768560762306}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 320
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.64
 --- !u!1 &862964082577443629
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2709515135750428926}
   - component: {fileID: 5666661992637515669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Asteroid sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
