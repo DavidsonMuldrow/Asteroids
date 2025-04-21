@@ -129,3 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31f7e7068db5814a96b58c3445a63ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debris_sprite: {fileID: 257503587218847813}
+  array_of_sprites:
+  - {fileID: 882020687, guid: 89459e416c3bce84294d7c267683f3e8, type: 3}
+  - {fileID: 1595759871, guid: 89459e416c3bce84294d7c267683f3e8, type: 3}
+  - {fileID: 857479812, guid: 89459e416c3bce84294d7c267683f3e8, type: 3}

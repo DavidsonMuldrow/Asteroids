@@ -5,11 +5,15 @@ using UnityEngine;
 public class Asteroid : SpaceObject
 {
 
-    private Vector2 direction = Vector2.zero;
+    protected Vector2 direction = Vector2.zero;
 
     public GameObject asteroid_sprite;
     public Sprite[] array_of_sprites;
-    private float spin_speed = 0f;
+    protected float spin_speed = 0f;
+
+    protected int health = 3;
+
+    [SerializeField] private GameObject small_asteroid;
 
     // Start is called before the first frame update
     void Start()
@@ -43,5 +47,33 @@ public class Asteroid : SpaceObject
         #region ScreenWrap
         ScreenWrap();
         #endregion
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Destroy(collision.gameObject);
+
+            health--;
+
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+
+                spawn_small_asteroid();
+            }
+        }
+    }
+
+    private void spawn_small_asteroid()
+    {
+        int num = Random.Range(2, 5);
+        for (var i = 0; i < num; i++)
+        {
+            GameObject new_small_asteroid = Instantiate(small_asteroid);
+
+            new_small_asteroid.transform.position = transform.position;
+        }
     }
 }

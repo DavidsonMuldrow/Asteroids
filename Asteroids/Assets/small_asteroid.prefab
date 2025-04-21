@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7893648376320103023}
   - component: {fileID: 2886242158269326749}
-  - component: {fileID: 4658345232299737951}
   - component: {fileID: 8766403873376674031}
+  - component: {fileID: 1531705028517452759}
   m_Layer: 7
-  m_Name: Asteroid
+  m_Name: small_asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,24 +62,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4658345232299737951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649555768560762306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 203712a1c599399499f690b647955321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asteroid_sprite: {fileID: 862964082577443629}
-  array_of_sprites:
-  - {fileID: 1939848758, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
-  - {fileID: -1399165551, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
-  - {fileID: 133880656, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
-  small_asteroid: {fileID: 649555768560762306, guid: 615835b77a152f849840bb14dbf7c888, type: 3}
 --- !u!58 &8766403873376674031
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +96,24 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.64
+  m_Radius: 0.32
+--- !u!114 &1531705028517452759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649555768560762306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c48252fff3174438994faacf50dada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroid_sprite: {fileID: 862964082577443629}
+  array_of_sprites:
+  - {fileID: 1877963300, guid: 1adc27b887044334ebb4b2ed54c19e28, type: 3}
+  - {fileID: -364750941, guid: 1adc27b887044334ebb4b2ed54c19e28, type: 3}
+  - {fileID: 1033482865, guid: 1adc27b887044334ebb4b2ed54c19e28, type: 3}
 --- !u!1 &862964082577443629
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +187,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1939848758, guid: d0b6344151ac9fe49ad2266ef8a2cf4d, type: 3}
+  m_Sprite: {fileID: 1877963300, guid: 1adc27b887044334ebb4b2ed54c19e28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

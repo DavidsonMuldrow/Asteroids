@@ -23,6 +23,8 @@ public class Player : SpaceObject
     private float rate_of_fire = 0.1f;
     private float shoot_timer = 0;
 
+    public GameObject debris;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,5 +103,20 @@ public class Player : SpaceObject
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, wrap_radius);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        for (int i = 0; i <= 2; i++)
+        {
+            GameObject new_debris = Instantiate(debris);
+            new_debris.transform.position = transform.position;
+
+            new_debris.GetComponent<Debris>().SetUp(i);
+
+            Destroy(new_debris, 1.5f);
+        }
+
+        Destroy(gameObject);
     }
 }
