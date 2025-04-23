@@ -9,7 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Start()
     {
-        Events.Asteroid_Was_Destroyed += spawn_asteroid;
+        Events.Asteroid_Was_Destroyed += CoroutineStarter;
     }
 
     void Update()
@@ -19,12 +19,37 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void spawn_asteroid()
     {
-        int num = Random.Range(2, 5);
-        for (var i = num -1; i < num; i++)
+        if (AsteroidInScene() == false)
         {
-            GameObject new_small_asteroid = Instantiate(asteroid);
-
-            new_small_asteroid.transform.position = Vector3.zero;
+            int num = Random.Range(2, 5);
+            for (var i = num - 1; i < num; i++)
+            {
+                GameObject new_small_asteroid = Instantiate(asteroid);
+            }
         }
+    }
+
+    private bool AsteroidInScene()
+    {
+        if (GameObject.FindWithTag("Asteroid") != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    IEnumerator DelayAsteroidSpawn()
+    {
+        yield return new WaitForSeconds(2f);
+        spawn_asteroid();
+    }
+
+    private void CoroutineStarter()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DelayAsteroidSpawn());
     }
 }

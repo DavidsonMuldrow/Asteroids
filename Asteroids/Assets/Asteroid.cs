@@ -32,6 +32,8 @@ public class Asteroid : SpaceObject
         asteroid_sprite.GetComponent<SpriteRenderer>().sprite = array_of_sprites[Random.Range(0, array_of_sprites.Length)];
 
         spin_speed = Random.Range(-20f, 20f);
+
+        SetPosition();
     }
 
     void Update()
@@ -75,5 +77,30 @@ public class Asteroid : SpaceObject
 
             new_small_asteroid.transform.position = transform.position;
         }
+    }
+
+    protected void SetPosition()
+    {
+        float pos_x, pos_y;
+
+        int num = Random.Range(0, 2);
+
+        switch(num)
+        {
+            //spawn at top or bottom
+            default:
+            case 0:
+                pos_x = Random.Range(cam_bottom_left.x, cam_top_right.x);
+                pos_y = cam_bottom_left.y - wrap_radius + 0.01f;
+                break;
+
+            //spawn at left or right
+            case 1:
+                pos_x = cam_bottom_left.x - wrap_radius + 0.01f;
+                pos_y = Random.Range(cam_bottom_left.y, cam_top_right.x);
+                break;
+        }
+
+        transform.position = new Vector3(pos_x, pos_y, 0);
     }
 }
