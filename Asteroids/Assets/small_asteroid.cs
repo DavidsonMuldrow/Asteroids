@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class small_asteroid : Asteroid
 {
+    private int score = 0;
+    public TMP_Text score_text;
     void Start()
     {
         FindCameraBounds();
@@ -22,6 +25,13 @@ public class small_asteroid : Asteroid
         spin_speed = Random.Range(-40f, 40f);
 
         health = 1;
+
+        score_text.text = "Score: 0";
+    }
+
+    private void Update()
+    {
+        score_text.text = "Score: " + score.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,7 +45,7 @@ public class small_asteroid : Asteroid
             if (health <= 0)
             {
                 Destroy(gameObject);
-
+                score++;
                 Events.Asteroid_Was_Destroyed?.Invoke();
             }
         }

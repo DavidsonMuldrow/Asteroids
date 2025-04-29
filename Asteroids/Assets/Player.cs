@@ -25,6 +25,8 @@ public class Player : SpaceObject
 
     public GameObject debris;
 
+    private float spam_timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,11 @@ public class Player : SpaceObject
         if (shoot_timer > 0)
         {
             shoot_timer -= Time.deltaTime;
+        }
+        
+        if (spam_timer <= 0)
+        {
+            
         }
     }
 
@@ -95,6 +102,25 @@ public class Player : SpaceObject
             new_bullet.GetComponent<Bullet>().SetUp(transform.up);
 
             new_bullet.transform.position = transform.position;
+        }
+    }
+
+    public void CaptureSpamInput(InputAction.CallbackContext context)
+    {
+        StartCoroutine(WaitInLoop());
+        spam_timer = 15f;
+        IEnumerator WaitInLoop()
+        {
+
+
+            while (spam_timer > 0)
+            {
+                GameObject new_bullet = Instantiate(bullet);
+                new_bullet.GetComponent<Bullet>().SetUp(transform.up);
+                new_bullet.transform.position = transform.position;
+                spam_timer--;
+                yield return new WaitForSeconds(.3f);
+            }   
         }
     }
 
