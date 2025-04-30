@@ -27,6 +27,8 @@ public class Player : SpaceObject
 
     private float spam_timer = 0;
 
+    public AudioClip fire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,6 +104,8 @@ public class Player : SpaceObject
             new_bullet.GetComponent<Bullet>().SetUp(transform.up);
 
             new_bullet.transform.position = transform.position;
+
+            AudioSource.PlayClipAtPoint(fire, transform.position);
         }
     }
 
@@ -119,6 +123,7 @@ public class Player : SpaceObject
                 new_bullet.GetComponent<Bullet>().SetUp(transform.up);
                 new_bullet.transform.position = transform.position;
                 spam_timer--;
+                AudioSource.PlayClipAtPoint(fire, transform.position);
                 yield return new WaitForSeconds(.3f);
             }   
         }

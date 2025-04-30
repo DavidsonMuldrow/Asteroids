@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject asteroid;
-
+    public TMP_Text score_text;
+    private float score = 0;
+    public AudioClip Explosion;
 
     void Start()
     {
         Events.Asteroid_Was_Destroyed += CoroutineStarter;
+        Events.Add_Score += addToScore;
+        score_text.text = "Score: 0";
     }
 
     void Update()
     {
-        
+
     }
 
     private void spawn_asteroid()
@@ -52,4 +58,12 @@ public class NewBehaviourScript : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(DelayAsteroidSpawn());
     }
+
+    private void addToScore()
+    {
+        score++;
+        score_text.text = "Score: " + score.ToString();
+        AudioSource.PlayClipAtPoint(Explosion, transform.position);
+    }
+
 }
